@@ -7,7 +7,7 @@
 ### In Windows
 
 * It works only if the console is "fullscreen"
-* If Controlled Folder Access is turned on, the program will not create folders.
+* If Controlled Folder Access is turned on, the program can not create folders.
 
 ### Run
 
