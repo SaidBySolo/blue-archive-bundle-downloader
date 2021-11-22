@@ -1,6 +1,6 @@
 # blue-archive-bundle-downloader
 
-> Download the resources of the Blue Archives easily!
+> Download the resources of the Blue Archive easily!
 
 ## Known issue
 
