@@ -67,8 +67,8 @@ async def main():
         return await asyncio.wait(
             [
                 download(
-                    f"https://{netloc}/{item}",
-                    f"./bundles/{item.replace('GameData/iOS/', '')}",
+                    f"https://{netloc}/{item['resource_path']}",
+                    f"./bundles/{item['resource_path'].replace('GameData/iOS/', '')}",
                 )
                 for item in bundles
             ]
