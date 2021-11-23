@@ -5,6 +5,8 @@ from typing import Optional
 import inquirer
 from aiofile.utils import async_open
 from aiohttp import ClientSession
+from yarl import URL
+from tqdm.asyncio import tqdm_asyncio
 
 netloc = "ba.dn.nexoncdn.co.kr"
 
@@ -43,6 +45,8 @@ async def main():
 
     resource_path = r["patch"]["resource_path"]
 
+    path = URL(resource_path).path.replace("/resource-data.json", "")
+
     resource_data = await request(resource_path)
 
     bundles = filter(
@@ -64,15 +68,16 @@ async def main():
         if not os.path.exists("./bundles"):
             os.makedirs("./bundles")
 
-        return await asyncio.wait(
-            [
+        await tqdm_asyncio.gather(
+            *[
                 download(
-                    f"https://{netloc}/{item['resource_path']}",
+                    f"https://{netloc}{path}/{item['resource_path']}",
                     f"./bundles/{item['resource_path'].replace('GameData/iOS/', '')}",
                 )
                 for item in bundles
             ]
         )
+        return
 
     searched_list = list(
         filter(lambda item: query.lower() in item["resource_path"], bundles)
@@ -91,10 +96,10 @@ async def main():
     if not os.path.exists("./bundles"):
         os.makedirs("./bundles")
 
-    await asyncio.wait(
-        [
+    await tqdm_asyncio.gather(
+        *[
             download(
-                f"https://{netloc}/{item}",
+                f"https://{netloc}{path}/{item}",
                 f"./bundles/{item.replace('GameData/iOS/', '')}",
             )
             for item in choiced
