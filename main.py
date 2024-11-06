@@ -34,13 +34,14 @@ async def main():
     r = await request(
         "https://api-pub.nexon.com/patch/v1.1/version-check",
         json={
-            "country": "KR",
-            "market_game_id": "1571873795",
+            "market_game_id": "com.nexon.bluearchive",
             "language": "ko-KR",
-            "curr_build_version": "1.35.115378",
-            "market_code": "appstore",
-            "sdk_version": "103",
-            "curr_build_number": "115378",
+            "market_code": "playstore",
+            "country": "KR",
+            "sdk_version": "239",
+            "curr_build_version": "1.69.303739",
+            "curr_build_number": "303739",
+            "curr_patch_version": "1207"
         },
     )
 
